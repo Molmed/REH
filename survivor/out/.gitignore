@@ -1,3 +1,5 @@
 *.vcf
 *.txt
+*.gz
+*.tbi
 vcfs
