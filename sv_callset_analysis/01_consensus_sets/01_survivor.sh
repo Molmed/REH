@@ -6,10 +6,9 @@
 # - pb.sniffles.vcf
 
 # PATHS TO BINARIES
-# Expected binary file in "../survivor/bin":
-# SURVIVOR Version: 1.0.7
+# Expected binary file: SURVIVOR Version: 1.0.7
 # https://github.com/fritzsedlazeck/SURVIVOR
-SURVIVOR="../survivor/bin/SURVIVOR"
+SURVIVOR="../bin/SURVIVOR"
 
 # PATHS
 OUT_DIR="out"

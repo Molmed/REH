@@ -1,9 +1,3 @@
-# Expected files in "../survivor/out" (output from run_survivor.sh):
-# - REH_merged_all_overlap.txt
-# - REH_merged_small_overlap.txt
-# - REH_merged_medium_overlap.txt
-# - REH_merged_large_overlap.txt
-
 library(VennDiagram)
 library(RColorBrewer)
 
@@ -19,7 +13,7 @@ text_size_numbers = .5
 text_size_labels = 0
 
 draw_venn <- function(overlap_file, output_file) {
-  input = paste("../survivor/out/", overlap_file, sep = "")
+  input = paste("out/", overlap_file, sep = "")
   output = paste("out/", output_file, sep = "")
   t=read.table(input,header=F)
   venn_data=list(Illumina=which(t[,1]==1), ONT=which(t[,2]==1), PB=which(t[,3]==1))

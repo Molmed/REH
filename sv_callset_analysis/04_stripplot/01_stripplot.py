@@ -10,7 +10,7 @@ DATA_DIR = "../data"
 ILLUMINA = DATA_DIR + "/illumina.tiddit.vcf"
 PB = DATA_DIR + "/pb.sniffles.vcf"
 ONT = DATA_DIR + "/ont.sniffles.vcf"
-CONSENSUS = "out/REH_consensus_3x.vcf"
+CONSENSUS = "../01_consensus_sets/out/REH_consensus_3x.vcf"
 
 # Output files
 OUT_DIR="out"

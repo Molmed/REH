@@ -3,7 +3,7 @@ import math
 import csv
 import re
 
-CONSENSUS = "../survivor/out/REH_consensus_3x.sorted.vcf.gz"
+CONSENSUS = "../01_consensus_sets/out/REH_consensus_3x.vcf"
 CHROM_LENTHS = "data/chrom_lengths.tsv"
 OUT_FILE="out/bins.tsv"
 

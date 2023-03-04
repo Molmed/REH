@@ -1,36 +1,28 @@
 #!/usr/bin/env bash
 
-# Expected binary file in "bin":
-# SURVIVOR Version: 1.0.7
-# https://github.com/fritzsedlazeck/SURVIVOR
-SURVIVOR="bin/SURVIVOR"
-
-# Paths for docker
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-DOCKER_MNT="/REH"
-
-# Path to binaries
-BCFTOOLS="docker run -v $SCRIPT_DIR:$DOCKER_MNT themariya/bcftools:latest bcftools"
-CONDA_BIN_DIR="/home/mariya/miniconda3/envs/reh/bin/"
-BGZIP="$CONDA_BIN_DIR/bgzip"
-TABIX="$CONDA_BIN_DIR/tabix"
-
-# Expected input in "data" directory:
+# Expected input in "../data" directory:
 # - illumina.tiddit.vcf
 # - ont.sniffles.vcf
 # - pb.sniffles.vcf
 
+# PATHS TO BINARIES
+# Expected binary file: SURVIVOR Version: 1.0.7
+# https://github.com/fritzsedlazeck/SURVIVOR
+SURVIVOR="../bin/SURVIVOR"
+
+# PATHS
+OUT_DIR="out"
+DATA_DIR="../data"
+BLACKLIST="../ref/hg38-blacklist.v2.bed"
+
+# Settings
 MAX_DISTANCE=1000
 MIN_BP=100
 SMALL=1000
 MEDIUM=10000
 LARGE=1000000
 
-OUT_DIR="out"
-DATA_DIR="data"
-TMP_DIR="/tmp"
-BLACKLIST="ref/hg38-blacklist.v2.bed"
-
+### GENERATE VCF LIST ###
 VCF_LIST="$OUT_DIR/vcfs"
 echo "$DATA_DIR/illumina.tiddit.vcf" >> $VCF_LIST
 echo "$DATA_DIR/ont.sniffles.vcf" >> $VCF_LIST
@@ -39,19 +31,6 @@ echo "$DATA_DIR/pb.sniffles.vcf" >> $VCF_LIST
 ### MERGE ALL SVS ###
 $SURVIVOR merge $VCF_LIST $MAX_DISTANCE 1 1 1 0 $MIN_BP "$OUT_DIR/REH_merged.tmp.vcf"
 $SURVIVOR filter "$OUT_DIR/REH_merged.tmp.vcf" $BLACKLIST $MIN_BP -1 0 -1 "$OUT_DIR/REH_merged_all.vcf"
-
-### CONSENSUS SETS ###
-$SURVIVOR merge $VCF_LIST $MAX_DISTANCE 2 1 1 0 $MIN_BP "$OUT_DIR/REH_consensus_2x.vcf" 
-$SURVIVOR merge $VCF_LIST $MAX_DISTANCE 3 1 1 0 $MIN_BP "$OUT_DIR/REH_consensus_3x.vcf"
-
-### SORT, COMPRESS AND INDEX CONSENSUS SETS ###
-$BCFTOOLS sort "$DOCKER_MNT/$OUT_DIR/REH_consensus_2x.vcf" -T $TMP_DIR -Oz -o "$DOCKER_MNT/$OUT_DIR/REH_consensus_2x.sorted.vcf"
-$BGZIP "$OUT_DIR/REH_consensus_2x.sorted.vcf"
-$TABIX -p vcf "$OUT_DIR/REH_consensus_2x.sorted.vcf.gz"
-
-$BCFTOOLS sort "$DOCKER_MNT/$OUT_DIR/REH_consensus_3x.vcf" -T $TMP_DIR -Oz -o "$DOCKER_MNT/$OUT_DIR/REH_consensus_3x.sorted.vcf"
-$BGZIP "$OUT_DIR/REH_consensus_3x.sorted.vcf"
-$TABIX -p vcf "$OUT_DIR/REH_consensus_3x.sorted.vcf.gz"
 
 ### NON-TRANSLOCATION STATISTICS ###
 # Strip out BNDs
