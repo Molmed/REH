@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Expected input in "../data" directory:
+# Expected input in "../../data" directory:
 # - illumina.tiddit.vcf
 # - ont.sniffles.vcf
 # - pb.sniffles.vcf
@@ -12,7 +12,7 @@ SURVIVOR="../bin/SURVIVOR"
 
 # PATHS
 OUT_DIR="out"
-DATA_DIR="../data"
+DATA_DIR="../../data"
 TMP_DIR="/tmp"
 
 # SETTINGS
@@ -21,7 +21,7 @@ MIN_BP=100
 
 ### GENERATE CONSENSUS SET ###
 VCF_LIST="$OUT_DIR/vcfs"
-echo "$DATA_DIR/illumina.tiddit.vcf" >> $VCF_LIST
+echo "$DATA_DIR/illumina.tiddit.vcf" > $VCF_LIST
 echo "$DATA_DIR/ont.sniffles.vcf" >> $VCF_LIST
 echo "$DATA_DIR/pb.sniffles.vcf" >> $VCF_LIST
 

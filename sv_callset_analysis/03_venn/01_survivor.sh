@@ -12,7 +12,7 @@ SURVIVOR="../bin/SURVIVOR"
 
 # PATHS
 OUT_DIR="out"
-DATA_DIR="../data"
+DATA_DIR="../../data"
 BLACKLIST="../ref/hg38-blacklist.v2.bed"
 
 # Settings
