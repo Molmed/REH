@@ -57,6 +57,29 @@ singularity exec samtools.sif samtools index \
 	    REH_WGS_ONT_PromethION_Ultralong/alignment/ont.sorted.bam \
 	    REH_WGS_ONT_PromethION_Ultralong/alignment/ont.sorted.bam.bai
 
+### DEPTH OF COVERAGE STATISTICS ###
+# samtools 1.15.1 coverage
+# Same command was run on fastq_data.recal.bam (Illumina), REH_pb_mapped.bam (PB), ont.sorted.bam (ONT)
+singularity exec samtools.sif samtools coverage \
+		REH_WGS_Illumina_TruSeqDnaPcrFree/fastq_data/Recalibrated/fastq_data.recal.bam > \
+	    analysis/coverage/samtools.coverage.illumina.txt
+
+# Copycat v9e21f79 (https://github.com/marianattestad/copycat) to bin coverage
+/bin/bash copycat \
+	  REH_WGS_Illumina_TruSeqDnaPcrFree/fastq_data/Recalibrated/fastq_data.recal.bam \
+	  hg38bundle/Homo_sapiens_assembly38.fasta \
+	  copycat.pcrfree
+
+/bin/bash copycat \
+	  REH_WGS_PacBio_HiFi_analysis/alignment/REH_pb_mapped.bam \
+	  hg38.fa \
+	  copycat.pb
+
+/bin/bash copycat \
+	  REH_WGS_ONT_PromethION_Ultralong/alignment/ont.sorted.bam \
+	  hg38.fa \
+	  copycat.ont
+
 ### SV CALLING ON LONG READS ###
 # Sniffles v 2.0.6. Same command run on ont.sorted.bam and REH_pb_mapped.bam.
 singularity exec sniffles.sif /usr/local/bin/sniffles \
