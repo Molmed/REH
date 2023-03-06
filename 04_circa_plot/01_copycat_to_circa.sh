@@ -1,6 +1,6 @@
 #!/bin/bash
 # Filters Copycat (https://github.com/MariaNattestad/copycat) output
-# to prepare it for visualization in Circa.
+# to prepare it for visualization in Circa v1.2.3 (https://omgenomics.com/circa/)
 
 DATA_DIR="../data"
 OUT_DIR="out"
