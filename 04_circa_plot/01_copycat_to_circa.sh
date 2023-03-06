@@ -2,7 +2,7 @@
 # Filters Copycat (https://github.com/MariaNattestad/copycat) output
 # to prepare it for visualization in Circa v1.2.3 (https://omgenomics.com/circa/)
 
-DATA_DIR="../data"
+DATA_DIR="../data/coverage"
 OUT_DIR="out"
 
 convert() {

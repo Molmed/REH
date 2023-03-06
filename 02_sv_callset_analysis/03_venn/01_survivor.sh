@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Expected input in "../data" directory:
+# Expected input in "../sv_callsets/data" directory:
 # - illumina.tiddit.vcf
 # - ont.sniffles.vcf
 # - pb.sniffles.vcf
@@ -12,7 +12,7 @@ SURVIVOR="../bin/SURVIVOR"
 
 # PATHS
 OUT_DIR="out"
-DATA_DIR="../../data"
+DATA_DIR="../../data/sv_callsets"
 BLACKLIST="../ref/hg38-blacklist.v2.bed"
 
 # Settings

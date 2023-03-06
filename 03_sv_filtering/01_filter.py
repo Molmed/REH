@@ -2,7 +2,7 @@ import re
 import pandas
 from pysam import VariantFile
 
-DATA_DIR="../data"
+DATA_DIR="../data/sv_callsets"
 ILLUMINA = DATA_DIR + "/illumina.tiddit.vcf"
 PB = DATA_DIR + "/pb.sniffles.vcf"
 ONT = DATA_DIR + "/ont.sniffles.vcf"
