@@ -3,22 +3,27 @@
 ## Citation
 This is a public repository containing scripts described in the publication "A complete digital karyotype of the B-cell leukemia REH cell line resolved by long-read sequencing" (Manuscript)
 
-## Instructions
-The scripts are numbered in the order they should be executed. For HPC scripts, the full paths to source files have been omitted for simplicity.
+## Data
+Primary data for this project are available at NCBI/SRA under the BioProject accession numbers PRJNA600820 and PRJNA834955. These data have been analyzed on a HPC using the commands in `01_hpc_processing`. The resulting analysis datasets are available at https://doi.org/10.5281/zenodo.7702098.
 
-## Pre-requisites
+## Instructions
+The scripts are numbered in the order they should be executed. 
+
+### HPC Bash Scripts
+For HPC scripts, the full paths to source files have been omitted for simplicity.
+
+### R and Python scripts
+
+To run the R and Python scripts in this repository, you will need to do the following:
+
+Install:
 - R 4.2.1 and an integrated environment, e.g. RStudio
 - R packages: chromoMap, RColorBrewer, VennDiagram
 - Python 3.8 
-- Install necessary Python packages: `pip install -r requirements.txt`
+- Necessary Python packages: `pip install -r requirements.txt`
 - SURVIVOR v1.0.7 built from: https://github.com/fritzsedlazeck/SURVIVOR and placed in the directory `02_sv_callset_analysis/bin`
 
-## Data
-Primary data for this project is available at NCBI/SRA under the BioProject accession numbers PRJNA600820 and PRJNA834955.
-
-Analysis datasets are available at [ZENODO DOI].
-
-To run the scripts in this directory, download the analysis files from Zenodo and place them in the following directories:
+Download the files from Zenodo and place them in the following directories:
 
 data/coverage:
 - copycat.ont.coverage.10kb.csv
