@@ -4,6 +4,8 @@ from gene_info import get_chromosome, set_chromosome, save_db
 
 DATA_DIR="../data/fusion_callsets"
 OUT_DIR="out"
+OUT_FILE=OUT_DIR + "/REH.svs.filtered.csv"
+
 GENE_WHITELIST="data/gene_whitelist.txt"
 # NOTE: this list was generated AFTER data analysis
 MANUALLY_CONFIRMED="data/manually_confirmed.txt"
@@ -395,5 +397,8 @@ for fusion_gene, row in fusion_genes.iterrows():
     row[OCCURS_IN_HEALTHY_COL] = occurs_in_gm12878
     row[NOTES_COL] = notes
 
+
+
 # Save
-fusion_genes.to_csv(OUT_DIR + "/REH.svs.filtered.csv")
+fusion_genes = fusion_genes.sort_values(by=[MANUALLY_CONFIRMED_COL, PASSED_AUTOMATED_FILTERING_COL], ascending=False)
+fusion_genes.to_csv(OUT_FILE, index=False)
