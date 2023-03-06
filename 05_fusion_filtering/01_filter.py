@@ -4,7 +4,7 @@ from gene_info import get_chromosome, set_chromosome, save_db
 
 DATA_DIR="../data/fusion_callsets"
 OUT_DIR="out"
-OUT_FILE=OUT_DIR + "/REH.svs.filtered.csv"
+OUT_FILE=OUT_DIR + "/REH.fusions.filtered.csv"
 
 GENE_WHITELIST="data/gene_whitelist.txt"
 # NOTE: this list was generated AFTER data analysis
