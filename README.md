@@ -1,20 +1,22 @@
 # REH cell line digital karyotyping
 
 ## Citation
-This is a public repository containing scripts described in the publication "A complete digital karyotype of the B-cell leukemia REH cell line resolved by long-read sequencing" (Manuscript)
+This is a public repository containing scripts described in the publication:
+
+Lysenkova Wiklander et al.
+"A complete digital karyotype of the B-cell leukemia REH cell line resolved by long-read sequencing"
 
 ## Data
-Primary data for this project are available at NCBI/SRA under the BioProject accession numbers PRJNA600820 and PRJNA834955. These data have been analyzed on a HPC using the commands in `01_hpc_processing`. The resulting analysis datasets are available at https://doi.org/10.5281/zenodo.7702098.
+Sequencing data and BAM files for this project are available at NCBI/SRA under the BioProject accession numbers PRJNA600820 and PRJNA834955. These data have been analyzed on a high performance cluster (HPC) using the commands in `01_hpc_processing`. The resulting analysis datasets are available at https://doi.org/10.5281/zenodo.7702098.
 
 ## Instructions
 The scripts are numbered in the order they should be executed. 
 
 ### HPC Bash Scripts
-For HPC scripts, the full paths to source files have been omitted for simplicity.
+For HPC scripts, the full paths to source files have been omitted for simplicity. You will need to adjust them to your environment.
 
-### R and Python scripts
-
-To run the R and Python scripts in this repository, you will need to do the following:
+### Other scripts
+To run the other scripts in this repository, you will need to do the following.
 
 Install:
 - R 4.2.1 and an integrated environment, e.g. RStudio
