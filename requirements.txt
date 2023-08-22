@@ -2,3 +2,4 @@ pandas
 pysam
 requests
 seaborn
+matplotlib
