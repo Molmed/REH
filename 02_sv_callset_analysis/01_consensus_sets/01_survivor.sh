@@ -26,3 +26,10 @@ echo "$DATA_DIR/ont.sniffles.vcf" >> $VCF_LIST
 echo "$DATA_DIR/pb.sniffles.vcf" >> $VCF_LIST
 
 $SURVIVOR merge $VCF_LIST $MAX_DISTANCE 3 1 1 0 $MIN_BP "$OUT_DIR/REH_consensus_3x.vcf"
+
+# GENERATE LONG-READ CONSENSUS SET ###
+VCF_LIST="$OUT_DIR/longread_vcfs"
+echo "$DATA_DIR/ont.sniffles.vcf" > $VCF_LIST
+echo "$DATA_DIR/pb.sniffles.vcf" >> $VCF_LIST
+
+$SURVIVOR merge $VCF_LIST $MAX_DISTANCE 2 1 1 0 $MIN_BP "$OUT_DIR/REH_consensus_longread.vcf"
