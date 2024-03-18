@@ -3,7 +3,9 @@ import math
 import csv
 import re
 
-CONSENSUS = "../01_consensus_sets/out/REH_consensus_3x.vcf"
+# Change this VCF file to produce map for other callsets
+# VCF = "../../data/sv_callsets/pb.sniffles.vcf"
+VCF = "../01_consensus_sets/out/REH_consensus_longread.vcf"
 CHROM_LENTHS = "data/chrom_lengths.tsv"
 OUT_FILE="out/bins.tsv"
 
@@ -18,7 +20,7 @@ def chromosome(str):
     m = re.search("chr([0-9X][0-9]?)$", str)
     if m:
         return m.group(1)
-    
+
 
 # Initialize bins
 chrom_lengths = {}
@@ -46,7 +48,7 @@ def process(vcf):
 
             # Optional: Ignore telomeres
             # is_telomere = pos < (BIN_SIZE * 2) or pos > chr_end - (BIN_SIZE * 2)
-            
+
             if not is_bnd: # and not is_telomere:
                 bin = min(math.ceil(pos / BIN_SIZE) * BIN_SIZE, chr_end)
 
@@ -57,7 +59,7 @@ def process(vcf):
 
                 bins[chr][bin] += 1
 
-process(VariantFile(CONSENSUS))         
+process(VariantFile(VCF))
 
 with open(OUT_FILE, 'w', newline='') as f_output:
     tsv_output = csv.writer(f_output, delimiter='\t')
@@ -65,7 +67,7 @@ with open(OUT_FILE, 'w', newline='') as f_output:
         for bin in bins[chr]:
             chr_name = "chr" + chr
             bin_name = chr_name + "_" + str(bin)
-            start = bin - BIN_SIZE + 1  
+            start = bin - BIN_SIZE + 1
             count = bins[chr][bin]
             row = [bin_name, chr_name, start, bin, count]
             tsv_output.writerow(row)
