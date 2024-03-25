@@ -1,0 +1,12 @@
+ggplot2
+patchwork
+VariantAnnotation
+BSgenome.Hsapiens.UCSC.hg38
+plyr
+data.table
+data.table
+RColorBrewer
+GenomicRanges
+IRanges
+hexbin
+ggrastr

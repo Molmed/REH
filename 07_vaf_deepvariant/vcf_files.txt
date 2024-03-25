@@ -1,0 +1,3 @@
+Illumina	/proj/ngi2016005/FU/FU164/analysis/SNV_deepvariant/REH-illumina.output.vcf.gz
+PB	/proj/ngi2016005/FU/FU164/analysis/SNV_deepvariant/REH-pacbio.output.vcf.gz
+ONT	/proj/ngi2016005/FU/FU164/analysis/SNV_deepvariant/ONT_pepper.vcf.gz
