@@ -129,3 +129,42 @@ java -Xmx8g -jar snpEff.jar -v GRCh38.99 \
 	REH_SNV.filtered.vcf.gz > REH.mutect.filtered.ann.vcf.gz
 
 
+# SNV CALLING FOR VAF PLOTS USING DEEPVARIANT ##
+singularity exec --bind /usr/lib/locale/ \
+	    pepper_deepvariant_r0.8.sif \
+	    run_pepper_margin_deepvariant call_variant \
+	    -b ont.sorted.bam \
+	    -f hg38.fa \
+	    -o out \
+	    -p ONT_pepper \
+	    -t 30 \
+	    --ont_r9_guppy5_sup
+
+singularity exec \
+  --bind deepvariant_input:/input \
+  --bind deepvariant_output/illumina:/output \
+  --bind reference/:/reference \
+  deepvariant_latest.sif  \
+  /opt/deepvariant/bin/run_deepvariant \
+  --model_type WGS \
+  --ref /reference/Homo_sapiens_assembly38.fasta \
+  --reads /input/fastq_data.recal.bam \
+  --output_vcf /output/REH-illumina.output.vcf.gz \
+  --output_gvcf /output/REH-illumina.output.g.vcf.gz \
+  --num_shards 16 \
+  --intermediate_results_dir /output/intermediate_results
+
+  singularity exec \
+  --bind deepvariant_input:/input \
+  --bind deepvariant_output/illumina:/output \
+  --bind reference/:/reference \
+  deepvariant_latest.sif  \
+  /opt/deepvariant/bin/run_deepvariant \
+  --model_type PACBIO \
+  --ref /reference/hg38.fa \
+  --reads /input/pt_004_hifi-mapped.bam \
+  --output_vcf /output/REH-pacbio.output.vcf.gz \
+  --output_gvcf /output/REH-pacbio.output.g.vcf.gz \
+  --num_shards 16 \
+  --intermediate_results_dir /output/intermediate_results
+
