@@ -108,3 +108,24 @@ singularity exec jaffa-2.1.sif bpipe run \
 	    -p refBase=REH_RnaSeq_HiFi_PacBio_IsoSeq_SMRT/jaffa/reference \
 	    /opt/JAFFA/JAFFAL.groovy \
 	    REH_RnaSeq_HiFi_PacBio_IsoSeq_SMRT/jaffa/*.fasta
+
+## SNV CALLING ON ILLUMINA WGS ##
+# GATK/4.3.0.0
+gatk Mutect2 \
+  -R hg38bundle/Homo_sapiens_assembly38.fasta \
+  -I fastq_data.md.bam \
+  --germline-resource af-only-gnomad.hg38.vcf.gz \
+  --panel-of-normals 1000g_pon.hg38.vcf.gz \
+  -O REH_SNV.vcf.gz
+
+gatk FilterMutectCalls \
+  -R hg38bundle/Homo_sapiens_assembly38.fasta \
+  -V REH_SNV.vcf.gz \
+  --unique-alt-read-count 2 \
+  --min-allele-fraction 0.3 \
+  -O REH_SNV.filtered.vcf.gz
+
+java -Xmx8g -jar snpEff.jar -v GRCh38.99 \
+	REH_SNV.filtered.vcf.gz > REH.mutect.filtered.ann.vcf.gz
+
+

@@ -45,9 +45,27 @@ singularity exec minimap2.sif minimap2 \
 	    pb.ccs.merged.fastq.gz > \
 	    racon/mapping/pb.overlaps.sam
 
-# racon v1.5.0
-singularity exec racon.sif racon -t 48 \
-	    pb.ccs.merged.fastq.gz \
-	    racon/mapping/pb.overlaps.sam \
-	    flye/00-assembly/draft_assembly.fasta > \
-	    racon/mapping/assembly.racon.fasta
+### PHASING WITH HAPDU AND HAPDIFF ###
+singularity minimap2.sif minimap2 \
+	    -ax map-ont -t 30 \
+	    medaka/consensus.fasta \
+	    trimmed.merged.porechopped.fastq | \
+        singularity exec samtools.sif samtools sort -@ 4 -m 4G > \
+	    hapdup/ont_reads_to_flye_assembly.bam
+
+singularity exec samtools.sif samtools index -@ 4 \
+	    hapdup/ont_reads_to_flye_assembly.bam
+
+singularity exec --bind ./hapdup \
+	    hapdup.sif hapdup \
+	    --assembly medaka/consensus.fasta \
+	    --bam hapdup/ont_reads_to_flye_assembly.bam \
+	    --out-dir hapdup/out \
+	    -t 48 --rtype ont
+
+singularity exec --bind ./hapdiff \
+	    hapdiff.sif hapdiff.py \
+	    --reference hapdiff/hg38.fa \
+	    --pat hapdiff/hapdup_phased_1.fasta \
+	    --mat hapdiff/hapdup_phased_2.fasta \
+	    --out-dir ./hapdiff \
