@@ -96,6 +96,7 @@ if do_process_sizes:
 SMALL=1000
 MEDIUM=10000
 LARGE=1000000
+XL=8000000
 
 plt.figure(figsize=(16, 11))
 plt.subplot(4, 1, 1)
@@ -111,7 +112,7 @@ ax = sns.stripplot(x='size', y='dataset', data=sizes_db, color='#6b5f88',
               alpha=a, size=4)
 plt.xlim(SMALL,MEDIUM)
 ax.set(xlabel='size (bp)', ylabel='')
-ax.set_title(label="Medium SVs (1 kbp - 10 kb)", loc='right', fontweight="bold")
+ax.set_title(label="Medium SVs (1 kb - 10 kb)", loc='right', fontweight="bold")
 
 
 plt.subplot(4, 1, 3)
@@ -119,14 +120,14 @@ ax = sns.stripplot(x='size', y='dataset', data=sizes_db, color='#3780b3',
               alpha=a, size=4)
 plt.xlim(MEDIUM,LARGE)
 ax.set(xlabel='size (Mb)', ylabel='')
-ax.set_title(label="Large SVs (10 kbp - 1 Mb)", loc='right', fontweight="bold")
+ax.set_title(label="Large SVs (10 kb - 1 Mb)", loc='right', fontweight="bold")
 
 plt.subplot(4, 1, 4)
 ax = sns.stripplot(x='size', y='dataset', data=sizes_db, color='#47a266',
               alpha=a, size=4)
-plt.xlim(MIN_BP,8000000)
+plt.xlim(LARGE,XL)
 ax.set(xlabel='size (Mb)', ylabel='')
-ax.set_title(label="All SVs (100 bp - 8 Mb)", loc='right', fontweight="bold")
+ax.set_title(label="Extra-large SVs (1 Mb - 8 Mb)", loc='right', fontweight="bold")
 
 plt.tight_layout()
 plt.savefig(OUT_FILE)
