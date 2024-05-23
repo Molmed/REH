@@ -1,10 +1,10 @@
-# REH cell line digital karyotyping
+# REH cell line multi-omics
 
 ## Citation
 This is a public repository containing scripts described in the publication:
 
 Lysenkova Wiklander et al.
-"A multiomic characterization of the leukemia cell line REH using short- and long-read sequencing"
+"A multiomic characterization of the leukemia cell line REH using short- and long-read sequencing" https://doi.org/10.26508/lsa.202302481
 
 ## Data
 Sequencing data and BAM files for this project are available at NCBI/SRA under the BioProject accession numbers PRJNA600820 and PRJNA834955. These data have been analyzed on a high performance cluster (HPC) using the commands in `01_hpc_processing`. The resulting analysis datasets are available at https://doi.org/10.5281/zenodo.108757278.
